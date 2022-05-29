@@ -40,22 +40,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception { //для аутентификации
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());;
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception { //для авторизации
-        http.authorizeRequests()//
+        http
+                .authorizeRequests()
                 .antMatchers("/user/**", "/login", "/webjars/**").hasAnyAuthority("ADMIN", "USER")
                 .antMatchers("/**").hasAuthority("ADMIN")
                 .and()
-                .formLogin().loginPage("/login").permitAll()
-                .successHandler(successUserHandler)
+                .formLogin().loginPage("/login").permitAll().successHandler(successUserHandler)
+                .and().httpBasic()
                 .and()
-                .logout().logoutSuccessUrl("/")
+                .logout().permitAll()
                 .and()
-                .csrf()
-                .disable();
+                .csrf().disable()
+                .cors().disable();
     }
 /* для автоматического создания админа (включать только после создания таблицы через create)
     @PostConstruct
