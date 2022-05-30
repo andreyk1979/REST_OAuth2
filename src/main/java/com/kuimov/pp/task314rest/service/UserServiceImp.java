@@ -3,9 +3,11 @@ package com.kuimov.pp.task314rest.service;
 import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -39,7 +41,11 @@ public class UserServiceImp implements UserService {
     }
 
     public User getUserById(long id) {
-        return userRepository.getById(id);
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Юзер с id " + id + " не найден");
+        }
+        return user;
     }
 
     @Override
