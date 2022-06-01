@@ -8,7 +8,7 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    void save(User user);
+    User save(User user);
 
     void delete(User user);
 

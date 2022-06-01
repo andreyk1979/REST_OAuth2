@@ -3,7 +3,9 @@ package com.kuimov.pp.task314rest.service;
 import com.kuimov.pp.task314rest.models.Role;
 import com.kuimov.pp.task314rest.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import javassist.NotFoundException;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,4 +35,5 @@ public class RoleServiceImp implements RoleService {
     public Set<Role> getSetRoles(Set<String> roles) {
         return roleRepository.findAllByNameIn(roles);
     }
+
 }

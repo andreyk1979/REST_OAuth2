@@ -1,6 +1,7 @@
 package com.kuimov.pp.task314rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.kuimov.pp.task314rest.models.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,11 @@ public class UserDTO {
     private String email;
     public String password;
     Set<String> roles;
+
+    public UserDTO(UserDTO user) {
+    }
+
+    public UserDTO(User userSave) {
+
+    }
 }

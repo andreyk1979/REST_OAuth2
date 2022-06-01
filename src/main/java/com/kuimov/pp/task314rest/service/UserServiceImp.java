@@ -1,5 +1,6 @@
 package com.kuimov.pp.task314rest.service;
 
+import com.kuimov.pp.task314rest.dto.UserDTO;
 import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,10 @@ public class UserServiceImp implements UserService {
         return userRepository.findAll();
     }
 
-    public void save(User user) {
+    public User save(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return user;
     }
 
     public void delete(User user) {
