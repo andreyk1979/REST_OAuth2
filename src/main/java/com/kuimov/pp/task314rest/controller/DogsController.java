@@ -1,14 +1,13 @@
 package com.kuimov.pp.task314rest.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class IndexController {
-    @RequestMapping("/index")
+public class DogsController {
+    @RequestMapping("/dogsList")
     public String showIndex() {
-        return "/index";
+        return "dogsList";
     }
 }
 
