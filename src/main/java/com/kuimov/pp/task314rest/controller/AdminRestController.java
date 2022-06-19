@@ -7,8 +7,10 @@ import com.kuimov.pp.task314rest.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -23,6 +25,16 @@ public class AdminRestController {
     public AdminRestController(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
+    }
+
+    @GetMapping("/incomingUser")
+    public ResponseEntity<User> getAuthenticationUser(@AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(userService.getAuthenticationUser(user), HttpStatus.OK);
+    }
+
+    @GetMapping("/incomingAdmin")
+    public ResponseEntity<User> getAuthenticationAdmin(@AuthenticationPrincipal User user) {
+        return new ResponseEntity<>(userService.getAuthenticationUser(user), HttpStatus.OK);
     }
 
     //Get all users

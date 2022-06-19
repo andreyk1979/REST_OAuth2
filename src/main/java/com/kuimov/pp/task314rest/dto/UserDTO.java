@@ -1,32 +1,88 @@
 package com.kuimov.pp.task314rest.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.kuimov.pp.task314rest.models.Role;
 import com.kuimov.pp.task314rest.models.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 import java.util.Set;
 
-@Getter
-@Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-@NoArgsConstructor
-@AllArgsConstructor
 public class UserDTO {
 
-    private long id;
-    private String firstname;
-    private String lastname;
+    private Long id;
+    private String FirstName;
+    private String LastName;
     private int age;
-    private String email;
-    public String password;
-    Set<String> roles;
+    private String Email;
+    private String password;
+    private Set<Role> roles;
 
-    public UserDTO(UserDTO user) {
+    public UserDTO() {
     }
 
-    public UserDTO(User userSave) {
+    public UserDTO(User user) {
+        this.id = user.getId();
+        this.FirstName = user.getFirstname();
+        this.LastName = user.getLastname();
+        this.age = user.getAge();
+        this.Email = user.getEmail();
+        this.password = user.getPassword();
+        this.roles = user.getRoles();
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
+        return FirstName;
+    }
+
+    public void setFirstName(String firstName) {
+        FirstName = firstName;
+    }
+
+    public String getLastName() {
+        return LastName;
+    }
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -1,7 +1,7 @@
 package com.kuimov.pp.task314rest.service;
 
 import com.kuimov.pp.task314rest.models.Role;
-import javassist.NotFoundException;
+
 
 import java.util.Set;
 

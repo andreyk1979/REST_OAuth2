@@ -1,6 +1,7 @@
 package com.kuimov.pp.task314rest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.kuimov.pp.task314rest.dto.UserDTO;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -34,7 +35,8 @@ public class User implements UserDetails {
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles;
+
     public User(String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
         this.firstname = firstname;
         this.lastname = lastname;
@@ -58,13 +60,14 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(UserDTO userDTO) {
+    public User(UserDTO userDTO){
         this.id = userDTO.getId();
-        this.firstname = userDTO.getFirstname();
-        this.lastname = userDTO.getLastname();
+        this.firstname = userDTO.getFirstName();
+        this.lastname = userDTO.getLastName();
         this.age = userDTO.getAge();
+        this.email  = userDTO.getEmail();
         this.password = userDTO.getPassword();
-        this.email = userDTO.getEmail();
+        this.roles = userDTO.getRoles();
     }
 
     @Override

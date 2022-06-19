@@ -1,13 +1,15 @@
 package com.kuimov.pp.task314rest.service;
 
-import com.kuimov.pp.task314rest.dto.UserDTO;
+
 import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -56,6 +58,11 @@ public class UserServiceImp implements UserService {
         if (user == null) {
             throw new UsernameNotFoundException(email);
         }
+        return user;
+    }
+
+    @Transactional(readOnly = true)
+    public User getAuthenticationUser(@AuthenticationPrincipal User user) {
         return user;
     }
 }

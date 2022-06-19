@@ -5,7 +5,7 @@ import com.kuimov.pp.task314rest.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-import javassist.NotFoundException;
+
 
 import java.util.HashSet;
 import java.util.Set;

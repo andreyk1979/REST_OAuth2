@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -47,8 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception { //для авторизации
         http
                 .authorizeRequests()
-                .antMatchers("/user/**", "/login", "/webjars/**").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/**").hasAuthority("ADMIN")
+                .antMatchers("/").hasAuthority("ADMIN")
+                .antMatchers("/user", "/login", "/webjars/**").hasAnyAuthority("ADMIN", "USER")
                 .and()
                 .formLogin().loginPage("/login").permitAll().successHandler(successUserHandler)
                 .and().httpBasic()
@@ -57,11 +58,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .cors().disable();
-    }
+
+//        http.cors()
+//                .and()
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/", "/user", "/login", "/webjars/**")
+//                .hasAnyAuthority("ADMIN", "USER")
+//                .antMatchers("/api", "/admin").hasAuthority("ADMIN")
+//                .and().httpBasic()
+//                .and().formLogin().permitAll().successHandler(new SuccessUserHandler()).and()
+//                .logout().logoutSuccessUrl("/login");
+//    }
+
 /* для автоматического создания админа (включать только после создания таблицы через create)
     @PostConstruct
     private void postConstruct() {
         User admin = new User("Andrey", "Kuimov", 43, "kuimow@mail.ru", "123456", roleService.getAllRoles());
         userService.save(admin);
     }*/
+    }
 }
