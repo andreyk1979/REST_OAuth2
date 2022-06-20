@@ -61,8 +61,8 @@ public class UserServiceImp implements UserService {
         return user;
     }
 
-    @Transactional(readOnly = true)
-    public User getAuthenticationUser(@AuthenticationPrincipal User user) {
-        return user;
-    }
+//    @Transactional(readOnly = true)
+//    public User getAuthenticationUser(@AuthenticationPrincipal User user) {
+//        return user;
+//    }
 }

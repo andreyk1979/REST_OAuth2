@@ -27,14 +27,9 @@ public class AdminRestController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/incomingUser")
+    @GetMapping("/authenticatedUsers")
     public ResponseEntity<User> getAuthenticationUser(@AuthenticationPrincipal User user) {
-        return new ResponseEntity<>(userService.getAuthenticationUser(user), HttpStatus.OK);
-    }
-
-    @GetMapping("/incomingAdmin")
-    public ResponseEntity<User> getAuthenticationAdmin(@AuthenticationPrincipal User user) {
-        return new ResponseEntity<>(userService.getAuthenticationUser(user), HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     //Get all users

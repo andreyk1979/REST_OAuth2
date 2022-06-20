@@ -35,7 +35,7 @@ public class AdminController {
         return "/adminPage";
     }
 
-    @GetMapping(path = {"/user", "/api/incomingUser"})
+    @GetMapping("/user")
     public String showLoggedInUserInformaion(@AuthenticationPrincipal User user, ModelMap model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", user.getRoles());
