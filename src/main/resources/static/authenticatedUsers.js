@@ -1,10 +1,10 @@
 let athenticationUserInfo = $('#tableAthenticationUser')
-let navbarInfo = $('#navBarInfo');
+let navbarUsersInfo = $('#navBarInfo');
 
 showUserInfo()
-inNavBar()
+navBarUser()
 
-function inNavBar() {
+function navBarUser() {
     fetch("/api/authenticatedUsers").then((response) => {
         console.log(response.statusText + response.status)
         if (response.ok) {
@@ -13,7 +13,7 @@ function inNavBar() {
                 let a = document.createElement('a');
                 a.setAttribute('class', "navbar-text text-white");
                 a.appendChild(document.createTextNode(user.email + " with roles : " + user.roles.map(roleUser => roleUser.name)))
-                navbarInfo.append(a);
+                navbarUsersInfo.append(a);
             });
         } else {
             console.error(response.statusText + response.status)

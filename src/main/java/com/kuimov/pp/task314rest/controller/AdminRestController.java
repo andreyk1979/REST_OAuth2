@@ -1,5 +1,6 @@
 package com.kuimov.pp.task314rest.controller;
 
+import com.kuimov.pp.task314rest.models.Role;
 import com.kuimov.pp.task314rest.service.RoleService;
 import com.kuimov.pp.task314rest.service.UserService;
 import com.kuimov.pp.task314rest.models.User;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 
 @RestController
@@ -27,6 +29,13 @@ public class AdminRestController {
         this.roleService = roleService;
     }
 
+
+    @GetMapping("/roles")
+    public ResponseEntity<Set<Role>> getAllRoles() {
+        return new ResponseEntity<>(roleService.getAllRoles(), HttpStatus.OK);
+    }
+
+    //Get authenticated User for authenticatedUsers.js
     @GetMapping("/authenticatedUsers")
     public ResponseEntity<User> getAuthenticationUser(@AuthenticationPrincipal User user) {
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -39,27 +48,27 @@ public class AdminRestController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    //Getting a user by Id
+    //Get a user by Id
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserId(@PathVariable long id) {
         User user = userService.getUserById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    //создание пользователя
+    //create user
     @PostMapping("/users")
     public ResponseEntity<User> newUser(@RequestBody User user) {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
-    //изменения пользователя
+    //edit user
     @PutMapping("/users")
     public ResponseEntity<User> editUser(@RequestBody User user) {
         User useredit = userService.save(user);
         return new ResponseEntity<>(useredit, HttpStatus.OK);
     }
-    //удалние пользователя
+    //delete User
     @DeleteMapping("/users/{id}")
     public ResponseEntity<User> deleteUserId(@PathVariable long id) {
         User user = userService.getUserById(id);

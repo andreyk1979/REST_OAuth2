@@ -8,7 +8,7 @@ getAllUsers();
 
 
 function getAllUsers() {
-    fetch("api/admin").then((response) => {
+    fetch("api/users").then((response) => {
         console.log(response.statusText + response.status)
         if (response.ok) {
             response.json().then((users) => {
@@ -30,10 +30,10 @@ function addUserForTable(user) {
     userInfo.append(
         '<tr>' +
         '<td>' + user.id + '</td>' +
-        '<td>' + user.firstName + '</td>' +
-        '<td>' + user.lastName + '</td>' +
-        '<td>' + user.email + '</td>' +
+        '<td>' + user.firstname + '</td>' +
+        '<td>' + user.lastname + '</td>' +
         '<td>' + user.age + '</td>' +
+        '<td>' + user.email + '</td>' +
         '<td>' + user.roles.map(roleUser => roleUser.name) + '</td>' +
         '<td>' +
         '<button onclick="editUserById(' + user.id + '); getAllRoles(); " class="btn btn-info edit-btn" data-toggle="modal" data-target="#edit"' +
@@ -73,7 +73,7 @@ function addNewUser() {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json; charset=utf-8');
-    let request = new Request('api/admin', {
+    let request = new Request('api/users', {
         method: 'POST',
         headers: headers,
         body: JSON.stringify(user)
@@ -105,12 +105,12 @@ function userClearModal() {
 }
 
 function editUserById(id) {
-    fetch("api/admin/" + id, {method: "GET", dataType: 'json',})
+    fetch("api/users/" + id, {method: "GET", dataType: 'json',})
         .then((response) => {
             response.json().then((user) => {
                 $('#editId').val(user.id);
-                $('#editFirstName').val(user.firstName);
-                $('#editLastName').val(user.lastName);
+                $('#editFirstName').val(user.firstname);
+                $('#editLastName').val(user.lastname);
                 $('#editEmail').val(user.email);
                 $('#editAge').val(user.age);
                 $('#editPassword').val(user.password);
@@ -147,7 +147,7 @@ function editButton() {
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json; charset=utf-8');
-    let request = new Request("api/admin/", {
+    let request = new Request("api/users/", {
         method: 'PUT',
         headers: headers,
         body: JSON.stringify(editUser),
@@ -170,12 +170,12 @@ function editButton() {
 }
 
 function deleteUserById(id) {
-    fetch("api/admin/" + id, {method: "GET", dataType: 'json',})
+    fetch("api/users/" + id, {method: "GET", dataType: 'json',})
         .then((response) => {
             response.json().then((user) => {
                 $('#deleteId').val(user.id)
-                $('#deleteFirstName').val(user.firstName)
-                $('#deleteLastName').val(user.lastName)
+                $('#deleteFirstName').val(user.firstname)
+                $('#deleteLastName').val(user.lastname)
                 $('#deleteEmail').val(user.email)
                 $('#deletePassword').val(user.password)
                 $('#deleteRole').val(user.roles.map(roleUser => roleUser.name))
@@ -187,7 +187,7 @@ function deleteUserById(id) {
 function deleteButton() {
     let userId = ($('#deleteId').val());
     console.log(userId)
-    fetch("api/admin/" + userId, {method: "DELETE"})
+    fetch("api/users/" + userId, {method: "DELETE"})
         .then((response) => {
             userInfo.empty()
             allUser = allUser.filter(user => user.id !== Number(userId))
