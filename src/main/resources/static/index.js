@@ -62,8 +62,8 @@ function addNewUser() {
     }
 
     let user = {
-        firstName: document.getElementById("addFirstName").value,
-        lastName: document.getElementById("addLastName").value,
+        firstname: document.getElementById("addFirstName").value,
+        lastname: document.getElementById("addLastName").value,
         email: document.getElementById("addEmail").value,
         age: document.getElementById("addAge").value,
         password: document.getElementById("addPassword").value,
@@ -136,8 +136,8 @@ function editButton() {
 
     let editUser = {
         id: document.getElementById("editId").value,
-        firstName: document.getElementById("editFirstName").value,
-        lastName: document.getElementById("editLastName").value,
+        firstname: document.getElementById("editFirstName").value,
+        lastname: document.getElementById("editLastName").value,
         email: document.getElementById("editEmail").value,
         password: document.getElementById("editPassword").value,
         age: document.getElementById("editAge").value,
