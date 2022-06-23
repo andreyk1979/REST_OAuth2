@@ -6,7 +6,6 @@ let allRoles = [];
 
 getAllUsers();
 
-
 function getAllUsers() {
     fetch("api/users").then((response) => {
         console.log(response.statusText + response.status)
@@ -25,7 +24,6 @@ function getAllUsers() {
     });
 }
 
-
 function addUserForTable(user) {
     userInfo.append(
         '<tr>' +
@@ -43,12 +41,64 @@ function addUserForTable(user) {
         '>Delete</button></td>' +
         '</tr>'
     )
-
 }
 
+function editUserById(id) {
+    fetch("api/users/" + id, {method: "GET", dataType: 'json',})
+        .then((response) => {
+            response.json().then((user) => {
+                $('#editId').val(user.id);
+                $('#editFirstName').val(user.firstname);
+                $('#editLastName').val(user.lastname);
+                $('#editEmail').val(user.email);
+                $('#editAge').val(user.age);
+                $('#editPassword').val(user.password);
+                $('#editRole').val(user.roles.map(roleUser => roleUser.name));
+
+                console.log(user)
+            })
+        })
+}
+
+function getAllRoles() {
+    fetch("api/roles").then((response) => {
+        console.log(response.statusText + response.status)
+        if (response.ok) {
+            response.json().then((roles) => {
+                roles.forEach((role) => {
+                    console.log(role)
+                    if (allRoles.length <= 1) {
+                        // ограничения по массиву нужен, что бы роли не двоились при нажатии на кнопки edit и new User
+                        addRolesForSelect(role)
+                        addRolesForEdit(role)
+
+                        allRoles.push(role)
+                    }
+                });
+            });
+            console.log(allRoles)
+        } else {
+            console.error(response.statusText + response.status)
+        }
+    });
+}
+
+function deleteUserById(id) {
+    fetch("api/users/" + id, {method: "GET", dataType: 'json',})
+        .then((response) => {
+            response.json().then((user) => {
+                $('#deleteId').val(user.id)
+                $('#deleteFirstName').val(user.firstname)
+                $('#deleteLastName').val(user.lastname)
+                $('#deleteEmail').val(user.email)
+                $('#deletePassword').val(user.password)
+                $('#deleteRole').val(user.roles.map(roleUser => roleUser.name))
+                $('#deleteAge').val(user.age)
+            })
+        })
+}
 
 function addNewUser() {
-
     let roleList = () => {
         let array = []
         let options = document.querySelector('#addRole').options
@@ -69,7 +119,6 @@ function addNewUser() {
         password: document.getElementById("addPassword").value,
         roles: roleList()
     }
-
 
     let headers = new Headers();
     headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -102,23 +151,6 @@ function userClearModal() {
     $('#addPassword').empty().val('');
     $('#addRole').val('');
 
-}
-
-function editUserById(id) {
-    fetch("api/users/" + id, {method: "GET", dataType: 'json',})
-        .then((response) => {
-            response.json().then((user) => {
-                $('#editId').val(user.id);
-                $('#editFirstName').val(user.firstname);
-                $('#editLastName').val(user.lastname);
-                $('#editEmail').val(user.email);
-                $('#editAge').val(user.age);
-                $('#editPassword').val(user.password);
-                $('#editRole').val(user.roles.map(roleUser => roleUser.name));
-
-                console.log(user)
-            })
-        })
 }
 
 function editButton() {
@@ -169,20 +201,6 @@ function editButton() {
     });
 }
 
-function deleteUserById(id) {
-    fetch("api/users/" + id, {method: "GET", dataType: 'json',})
-        .then((response) => {
-            response.json().then((user) => {
-                $('#deleteId').val(user.id)
-                $('#deleteFirstName').val(user.firstname)
-                $('#deleteLastName').val(user.lastname)
-                $('#deleteEmail').val(user.email)
-                $('#deletePassword').val(user.password)
-                $('#deleteRole').val(user.roles.map(roleUser => roleUser.name))
-                $('#deleteAge').val(user.age)
-            })
-        })
-}
 
 function deleteButton() {
     let userId = ($('#deleteId').val());
@@ -205,29 +223,6 @@ $('#panelTabs a').on('click', function (event) {
     $(this).tab('show')
 })
 
-
-function getAllRoles() {
-    fetch("api/roles").then((response) => {
-        console.log(response.statusText + response.status)
-        if (response.ok) {
-            response.json().then((roles) => {
-                roles.forEach((role) => {
-                    console.log(role)
-                    if (allRoles.length <= 3) {
-                        // ограничения по массиву нужен, что бы роли не двоились при нажатии на кнопки edit и new User
-                        addRolesForSelect(role)
-                        addRolesForEdit(role)
-
-                        allRoles.push(role)
-                    }
-                });
-            });
-            console.log(allRoles)
-        } else {
-            console.error(response.statusText + response.status)
-        }
-    });
-}
 
 function addRolesForSelect(role) {
     rolesInfo.append(
