@@ -2,7 +2,6 @@ package com.kuimov.pp.task314rest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import com.kuimov.pp.task314rest.dto.UserDTO;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
@@ -10,7 +9,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -58,16 +56,6 @@ public class User implements UserDetails {
     }
 
     public User() {
-    }
-
-    public User(UserDTO userDTO){
-        this.id = userDTO.getId();
-        this.firstname = userDTO.getFirstName();
-        this.lastname = userDTO.getLastName();
-        this.age = userDTO.getAge();
-        this.email  = userDTO.getEmail();
-        this.password = userDTO.getPassword();
-        this.roles = userDTO.getRoles();
     }
 
     @Override
