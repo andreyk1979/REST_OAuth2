@@ -3,7 +3,6 @@ package com.kuimov.pp.task314rest.service;
 import com.kuimov.pp.task314rest.models.Role;
 import com.kuimov.pp.task314rest.repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 

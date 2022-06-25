@@ -20,5 +20,4 @@ public interface UserService {
 
     User getUserByEmail (String email);
 
-//    User getAuthenticationUser(User user);
 }

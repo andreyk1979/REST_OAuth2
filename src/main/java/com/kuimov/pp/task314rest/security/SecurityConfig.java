@@ -59,18 +59,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .cors().disable();
 
-//        http.cors()
-//                .and()
-//                .csrf().disable()
-//                .authorizeRequests()
-//                .antMatchers("/", "/user", "/login", "/webjars/**")
-//                .hasAnyAuthority("ADMIN", "USER")
-//                .antMatchers("/api", "/admin").hasAuthority("ADMIN")
-//                .and().httpBasic()
-//                .and().formLogin().permitAll().successHandler(new SuccessUserHandler()).and()
-//                .logout().logoutSuccessUrl("/login");
-//    }
-
 /* для автоматического создания админа (включать только после создания таблицы через create)
     @PostConstruct
     private void postConstruct() {
