@@ -1,18 +1,20 @@
-package com.kuimov.pp.task314rest.service;
+package com.kuimov.pp.task314rest.serviceImpl;
 
 
 import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.repository.UserRepository;
+import com.kuimov.pp.task314rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-
 @Service
+@Transactional
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
@@ -42,10 +44,10 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
 
-    public User getUserById(long id) {
+    public User getUserById(long id) throws Exception {
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Юзер с id " + id + " не найден");
+            throw new Exception("Юзер с id " + id + " не найден");
         }
         return user;
     }

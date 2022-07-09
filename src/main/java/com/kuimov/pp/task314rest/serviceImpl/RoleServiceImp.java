@@ -1,16 +1,18 @@
-package com.kuimov.pp.task314rest.service;
+package com.kuimov.pp.task314rest.serviceImpl;
 
 import com.kuimov.pp.task314rest.models.Role;
 import com.kuimov.pp.task314rest.repository.RoleRepository;
+import com.kuimov.pp.task314rest.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.HashSet;
 import java.util.Set;
 
-
 @Service
+@Transactional
 public class RoleServiceImp implements RoleService {
 
     private final RoleRepository roleRepository;
