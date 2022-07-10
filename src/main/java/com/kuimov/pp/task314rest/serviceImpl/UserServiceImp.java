@@ -53,10 +53,10 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email) throws UsernameNotFoundException {
+    public User getUserByEmail(String email)  throws UsernameNotFoundException {
         User user = userRepository.getUserByEmail(email);
         if (user == null) {
-            throw new UsernameNotFoundException(email);
+            throw new UsernameNotFoundException(String.format("User '%s' not found", email));
         }
         return user;
     }
