@@ -1,10 +1,9 @@
 package com.kuimov.pp.task314rest.controller;
 
 import com.kuimov.pp.task314rest.models.Role;
+import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.service.RoleService;
 import com.kuimov.pp.task314rest.service.UserService;
-import com.kuimov.pp.task314rest.models.User;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +28,6 @@ public class AdminRestController {
         this.roleService = roleService;
     }
 
-
     @GetMapping("/roles")
     public ResponseEntity<Set<Role>> getAllRoles() {
         return new ResponseEntity<>(roleService.getAllRoles(), HttpStatus.OK);
@@ -42,6 +40,7 @@ public class AdminRestController {
     }
 
     //Get all users
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/users")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
@@ -49,6 +48,7 @@ public class AdminRestController {
     }
 
     //Get a user by Id
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserId(@PathVariable long id) throws Exception {
         User user = userService.getUserById(id);
@@ -66,8 +66,8 @@ public class AdminRestController {
     //edit user
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/users")
-    public ResponseEntity<User> editUser(@RequestBody User user) {
-        User useredit = userService.save(user);
+    public ResponseEntity<User> editUser(@RequestBody User user)  {
+        User useredit = userService.edit(user);
         return new ResponseEntity<>(useredit, HttpStatus.OK);
     }
     //delete User

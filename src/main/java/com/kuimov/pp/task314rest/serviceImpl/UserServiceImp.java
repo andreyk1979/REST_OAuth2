@@ -5,14 +5,13 @@ import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.repository.UserRepository;
 import com.kuimov.pp.task314rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImp implements UserService {
@@ -40,8 +39,10 @@ public class UserServiceImp implements UserService {
         userRepository.delete(user);
     }
 
-    public void edit(User user) {
+    public User edit(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return user;
     }
 
     public User getUserById(long id) throws Exception {
@@ -53,7 +54,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email)  throws UsernameNotFoundException {
+    public User getUserByEmail(String email) throws UsernameNotFoundException {
         User user = userRepository.getUserByEmail(email);
         if (user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", email));

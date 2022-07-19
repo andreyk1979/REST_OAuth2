@@ -21,6 +21,7 @@ public class UserGlobalExceptionHandler extends RuntimeException {
         }
         return new ResponseEntity<>(data, HttpStatus.SEE_OTHER);
     }
+
     @ExceptionHandler
     public ResponseEntity<UsersIncorrectData> handleException(Exception e) {
         UsersIncorrectData data = new UsersIncorrectData();

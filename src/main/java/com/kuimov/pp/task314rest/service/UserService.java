@@ -1,9 +1,7 @@
 package com.kuimov.pp.task314rest.service;
 
 import com.kuimov.pp.task314rest.models.User;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ public interface UserService {
 
     void delete(User user);
 
-    void edit(User user);
+    User edit(User user);
 
     User getUserById(long id) throws Exception;
 

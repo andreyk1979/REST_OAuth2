@@ -1,8 +1,8 @@
 package com.kuimov.pp.task314rest.controller;
 
-import com.kuimov.pp.task314rest.service.RoleService;
 import com.kuimov.pp.task314rest.models.Role;
 import com.kuimov.pp.task314rest.models.User;
+import com.kuimov.pp.task314rest.service.RoleService;
 import com.kuimov.pp.task314rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,6 +26,7 @@ public class AdminController {
         this.roleService = roleService;
     }
 
+   // @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("")
     public String showAllUsers(ModelMap modelMap, @AuthenticationPrincipal User user) {
         modelMap.addAttribute("list", userService.getAllUsers());
@@ -42,23 +43,23 @@ public class AdminController {
     }
 
 
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping("/save")
-    public String processUserRegistration(@ModelAttribute User user,
-                                          @RequestParam(value = "roless",
-                                                  required = false,
-                                                  defaultValue = "USER") Set<String> roles) {
-        Set<Role> setRoles = roleService.getSetRoles(roles);
-        user.setRoles(setRoles);
-        userService.save(user);
-        return "redirect:/admin";
-    }
-
-    @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping(value = "/users/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id) throws Exception {
-        User user = userService.getUserById(id);
-        userService.delete(user);
-        return "redirect:/admin";
-    }
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PostMapping("/save")
+//    public String processUserRegistration(@ModelAttribute User user,
+//                                          @RequestParam(value = "roless",
+//                                                  required = false,
+//                                                  defaultValue = "USER") Set<String> roles) {
+//        Set<Role> setRoles = roleService.getSetRoles(roles);
+//        user.setRoles(setRoles);
+//        userService.save(user);
+//        return "redirect:/admin";
+//    }
+//
+//    @PreAuthorize("hasAuthority('ADMIN')")
+//    @PostMapping(value = "/users/delete/{id}")
+//    public String deleteUser(@PathVariable("id") long id) throws Exception {
+//        User user = userService.getUserById(id);
+//        userService.delete(user);
+//        return "redirect:/admin";
+//    }
 }

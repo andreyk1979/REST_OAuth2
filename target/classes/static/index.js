@@ -201,7 +201,6 @@ function editButton() {
     });
 }
 
-
 function deleteButton() {
     let userId = ($('#deleteId').val());
     console.log(userId)

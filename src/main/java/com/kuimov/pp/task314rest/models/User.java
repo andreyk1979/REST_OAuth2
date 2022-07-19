@@ -1,7 +1,6 @@
 package com.kuimov.pp.task314rest.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,10 +28,12 @@ public class User implements UserDetails {
     private String password;
     @Column(name = "age")
     private int age;
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
+
     private Set<Role> roles;
 
     public User(String firstname, String lastname, int age, String email, String password, Set<Role> roles) {
@@ -69,6 +70,10 @@ public class User implements UserDetails {
         return password;
     }//пароль использует UserDetails
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     @JsonIgnore
     public String getUsername() {
@@ -97,10 +102,6 @@ public class User implements UserDetails {
     @JsonIgnore
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstname() {
