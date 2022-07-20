@@ -70,6 +70,7 @@ public class AdminRestController {
         User useredit = userService.edit(user);
         return new ResponseEntity<>(useredit, HttpStatus.OK);
     }
+
     //delete User
     @PreAuthorize("hasAuthority('ADMIN')")
     @DeleteMapping("/users/{id}")

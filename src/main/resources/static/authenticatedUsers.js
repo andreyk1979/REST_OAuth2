@@ -1,6 +1,6 @@
- let athenticationUserInfo = $('#tableAthenticationUser')
+let athenticationUserInfo = $('#tableAthenticationUser')
 
- showUserInfo()
+showUserInfo()
 
 function showUserInfo() {
     fetch("/api/authenticatedUsers").then((response) => {
@@ -8,7 +8,7 @@ function showUserInfo() {
         if (response.ok) {
             response.json().then((user) => {
                 console.log(user)
-               addUserForTable(user)
+                addUserForTable(user)
             });
         } else {
             console.error(response.statusText + response.status)

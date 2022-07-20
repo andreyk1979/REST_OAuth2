@@ -1,6 +1,4 @@
 package com.kuimov.pp.task314rest.serviceImpl;
-//user.setPassword(passwordEncoder.encode(user.getPassword()));
-// userRepository.saveAndFlush(user); для save
 
 import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.repository.UserRepository;
@@ -29,6 +27,7 @@ public class UserServiceImp implements UserService {
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
     @Transactional
     public User save(User user) throws Exception {
         if (user.getId() != null) {
@@ -43,10 +42,12 @@ public class UserServiceImp implements UserService {
         userRepository.saveAndFlush(user);
         return user;
     }
+
     @Transactional
     public void delete(User user) {
         userRepository.delete(user);
     }
+
     @Transactional
     public User edit(User user) throws Exception {
 
@@ -65,6 +66,7 @@ public class UserServiceImp implements UserService {
         }
         return user;
     }
+
     @Transactional
     @Override
     public User getUserByEmail(String email) throws UsernameNotFoundException {

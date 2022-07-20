@@ -18,6 +18,6 @@ public interface UserService {
 
     User getUserById(long id) throws Exception;
 
-    User getUserByEmail (String email);
+    User getUserByEmail(String email);
 
 }

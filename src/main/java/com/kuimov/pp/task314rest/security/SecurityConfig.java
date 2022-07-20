@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 
                 .antMatchers("/user", "/login", "/webjars/**").hasAnyAuthority("ADMIN", "USER")
-                .antMatchers("/admin/**","/api/admin/**","/users").hasAuthority("ADMIN")
+                .antMatchers("/admin/**", "/api/admin/**", "/users").hasAuthority("ADMIN")
                 .and()
                 .formLogin().loginPage("/login").permitAll().successHandler(successUserHandler)
                 .and().httpBasic()

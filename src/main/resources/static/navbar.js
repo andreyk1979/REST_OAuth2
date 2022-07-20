@@ -1,4 +1,3 @@
-//let athenticationUserInfo = $('#tableAthenticationUser')
 let navbarUsersInfo = $('#navBarInfo');
 
 
