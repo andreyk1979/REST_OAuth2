@@ -10,11 +10,11 @@ public interface UserService {
 
     List<User> getAllUsers();
 
-    User save(User user);
+    User save(User user) throws Exception;
 
     void delete(User user);
 
-    User edit(User user);
+    User edit(User user) throws Exception;
 
     User getUserById(long id) throws Exception;
 

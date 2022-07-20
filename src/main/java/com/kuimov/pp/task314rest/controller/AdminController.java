@@ -26,7 +26,6 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-   // @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("")
     public String showAllUsers(ModelMap modelMap, @AuthenticationPrincipal User user) {
         modelMap.addAttribute("list", userService.getAllUsers());

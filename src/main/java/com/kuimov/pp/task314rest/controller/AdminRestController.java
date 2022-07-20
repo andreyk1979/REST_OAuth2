@@ -58,7 +58,7 @@ public class AdminRestController {
     //create user
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/users")
-    public ResponseEntity<User> newUser(@RequestBody User user) {
+    public ResponseEntity<User> newUser(@RequestBody User user) throws Exception {
         userService.save(user);
         return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
@@ -66,7 +66,7 @@ public class AdminRestController {
     //edit user
     @PreAuthorize("hasAuthority('ADMIN')")
     @PutMapping("/users")
-    public ResponseEntity<User> editUser(@RequestBody User user)  {
+    public ResponseEntity<User> editUser(@RequestBody User user) throws Exception {
         User useredit = userService.edit(user);
         return new ResponseEntity<>(useredit, HttpStatus.OK);
     }
