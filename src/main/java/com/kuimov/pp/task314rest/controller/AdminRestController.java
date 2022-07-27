@@ -5,8 +5,10 @@ import com.kuimov.pp.task314rest.models.User;
 import com.kuimov.pp.task314rest.service.RoleService;
 import com.kuimov.pp.task314rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +30,7 @@ public class AdminRestController {
         this.roleService = roleService;
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/roles")
     public ResponseEntity<Set<Role>> getAllRoles() {
         return new ResponseEntity<>(roleService.getAllRoles(), HttpStatus.OK);

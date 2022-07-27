@@ -54,7 +54,7 @@ public class UserServiceImp implements UserService {
         if (!user.getPassword().equals(getUserById(user.getId()).getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        save(user);
+        userRepository.saveAndFlush(user);
         return user;
     }
 
